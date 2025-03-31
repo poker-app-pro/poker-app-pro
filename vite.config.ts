@@ -12,5 +12,15 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['vue','aws-amplify'],
+          ui: ['@aws-amplify/ui-vue'],
+        },
+      },
+    },
   }
 })

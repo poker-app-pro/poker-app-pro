@@ -9,12 +9,16 @@ const client = generateClient<Schema>();
 // create a reactive reference to the array of todos
 const todos = ref<Array<Schema['Todo']["type"]>>([]);
 
+function deleteTodo(id: string) {
+  client.models.Todo.delete({ id })
+}
+
 function listTodos() {
   client.models.Todo.observeQuery().subscribe({
     next: ({ items, isSynced }) => {
       todos.value = items
-     },
-  }); 
+    },
+  });
 }
 
 function createTodo() {
@@ -25,9 +29,9 @@ function createTodo() {
     listTodos();
   });
 }
-    
+
 // fetch todos when the component is mounted
- onMounted(() => {
+onMounted(() => {
   listTodos();
 });
 
@@ -38,9 +42,7 @@ function createTodo() {
     <h1>My todos</h1>
     <button @click="createTodo">+ new</button>
     <ul>
-      <li 
-        v-for="todo in todos" 
-        :key="todo.id">
+      <li v-for="todo in todos" :key="todo.id" @click="deleteTodo(todo.id)">
         {{ todo.content }}
       </li>
     </ul>
