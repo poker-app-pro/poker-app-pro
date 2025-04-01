@@ -8,7 +8,10 @@
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build --force"
+    "type-check": "vue-tsc --build --force",
+    "sandbox": "npm-run-all2 --parallel sandbox:up dev",
+    "sandbox:up": "npx ampx sandbox --profile poker-app-pro",
+    "sandbox:down": "npx ampx sandbox --profile poker-app-pro"
   },
   "dependencies": {
     "@aws-amplify/ui-vue": "^4.2.31",
