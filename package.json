@@ -11,7 +11,7 @@
     "lint": "eslint . --fix",
     "sandbox": "npm-run-all2 --parallel sandbox:up dev",
     "sandbox:up": "npx ampx sandbox --profile poker-app-pro",
-    "sandbox:down": "npx ampx sandbox --profile poker-app-pro",
+    "sandbox:down": "npx ampx sandbox delete --profile poker-app-pro",
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
