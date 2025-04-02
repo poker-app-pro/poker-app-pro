@@ -12,7 +12,7 @@ import "@aws-amplify/ui-vue/styles.css";
       <AppSidebar />
     </v-navigation-drawer>
 
-    <v-main class="d-flex align-center justify-center">
+    <v-main class="d-flex">
       <v-container>
         <router-view />
       </v-container>
