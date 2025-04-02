@@ -2,9 +2,7 @@
 </script>
 
 <template>
-  <authenticator>
-    <v-app>
-      <router-view />
-    </v-app>
-  </authenticator>
+  <v-app>
+    <router-view />
+  </v-app>
 </template>
