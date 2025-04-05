@@ -61,9 +61,12 @@ export default defineConfig({
   ],
   define: { 'process.env': {} },
   resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-    },
+    alias: [
+      {
+        find: /^@\/(.*)/,
+        replacement: fileURLToPath(new URL('./src/$1', import.meta.url)),
+      }
+    ],
     extensions: [
       '.js',
       '.json',
