@@ -1,7 +1,7 @@
 <template>
-  <HelloWorld />
+  <Scoreboard />
 </template>
 
 <script lang="ts" setup>
-  //
+//
 </script>

@@ -7,7 +7,24 @@ async function handleSignOut() {
 </script>
 
 <template>
-    <v-list nav>
-        <v-list-item title="Sign Out" link v-on:click="handleSignOut"></v-list-item>
-    </v-list>
+  <v-list nav>
+    <v-list-item
+      title="Leagues"
+      link
+      to="/leagues"
+    />
+  </v-list>
+  <div
+    block
+    class="px-2"
+  >
+    <v-btn
+      variant="tonal"
+      class="mx-auto"
+      block
+      @click="handleSignOut"
+    >
+      Sign Out
+    </v-btn>
+  </div>
 </template>

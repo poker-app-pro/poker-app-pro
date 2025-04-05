@@ -13,6 +13,12 @@ import { fileURLToPath, URL } from 'node:url'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  optimizeDeps: {
+    exclude: ['@aws-amplify/backend'],
+  },
+  ssr: {
+    external: ['@aws-amplify/backend'],
+  },
   plugins: [
     VueRouter({
       dts: 'src/typed-router.d.ts',
@@ -80,6 +86,7 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
+      external: ['@aws-amplify/backend'],
       output: {
         manualChunks: {
           vendor: ['vue', 'aws-amplify', 'core-js'],

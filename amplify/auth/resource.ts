@@ -8,4 +8,5 @@ export const auth: ReturnType<typeof defineAuth> = defineAuth({
   loginWith: {
     email: true,
   },
+  groups: ['Admin']
 });

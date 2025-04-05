@@ -1,16 +1,78 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
 
-/*== STEP 1 ===============================================================
-The section below creates a Todo database table with a "content" field. Try
-adding a new "isDone" field as a boolean. The authorization rule below
-specifies that any user authenticated via an API key can "create", "read",
-"update", and "delete" any "Todo" records.
-=========================================================================*/
 const schema = a.schema({
-  Todo: a
-    .model({
-      content: a.string(),
-    }).authorization(allow => [allow.owner()]),
+  League: a.model({
+    name: a.string().required(),
+    seasons: a.hasMany('Season', 'leagueId'),
+    // organizerIds: a.string().array(),
+    // players: a.hasMany('Player', 'leagueId')
+  }).authorization(allow => [allow.publicApiKey()]),
+
+  Season: a.model({
+    name: a.string().required(),
+    startDate: a.date().required(),
+    leagueId: a.id().required(),
+    league: a.belongsTo('League', 'leagueId'),
+    // series: a.hasMany('Series', 'seasonId'),
+    // finalEvent: a.hasOne('FinalEvent', 'seasonId'),
+    // organizerIds: a.string().array().required()
+  }).authorization(allow => [allow.publicApiKey()]),
+
+  // Series: a.model({
+  //   name: a.string().required(),
+  //   seasonId: a.id().required(),
+  //   season: a.belongsTo('Season', 'seasonId'),
+  //   tournaments: a.hasMany('Tournament', 'seriesId'),
+  //   organizerIds: a.string().array().required()
+  // }).authorization(allow => [allow.publicApiKey()]),
+
+  // Tournament: a.model({
+  //   name: a.string().required(),
+  //   date: a.date().required(),
+  //   seriesId: a.id().required(),
+  //   series: a.belongsTo('Series', 'seriesId'),
+  //   results: a.hasMany('TournamentResult', 'tournamentId'),
+  //   organizerIds: a.string().array().required()
+  // }).authorization(allow => [allow.publicApiKey()]),
+
+  // Player: a.model({
+  //   name: a.string().required(),
+  //   leagueId: a.id().required(),
+  //   league: a.belongsTo('League', 'leagueId'),
+  //   results: a.hasMany('TournamentResult', 'playerId'),
+  //   chipAwards: a.hasMany('ChipAward', 'playerId'),
+  //   organizerIds: a.string().array().required()
+  // }).authorization(allow => [allow.publicApiKey()]),
+
+  // TournamentResult: a.model({
+  //   rank: a.integer().required(),
+  //   points: a.integer().required(),
+  //   bounty: a.integer().required(),
+  //   consolation: a.integer().required(),
+  //   tournamentId: a.id().required(),
+  //   tournament: a.belongsTo('Tournament', 'tournamentId'),
+  //   playerId: a.id().required(),
+  //   player: a.belongsTo('Player', 'playerId'),
+  //   organizerIds: a.string().array().required()
+  // }).authorization(allow => [allow.publicApiKey()]),
+
+  // FinalEvent: a.model({
+  //   date: a.date().required(),
+  //   seasonId: a.id().required(),
+  //   season: a.belongsTo('Season', 'seasonId'),
+  //   qualifiedPlayerIds: a.id().array().required(),
+  //   chipAwards: a.hasMany('ChipAward', 'finalEventId'),
+  //   organizerIds: a.string().array().required()
+  // }).authorization(allow => [allow.publicApiKey()]),
+
+  // ChipAward: a.model({
+  //   totalChips: a.integer().required(),
+  //   finalEventId: a.id().required(),
+  //   finalEvent: a.belongsTo('FinalEvent', 'finalEventId'),
+  //   playerId: a.id().required(),
+  //   player: a.belongsTo('Player', 'playerId'),
+  //   organizerIds: a.string().array().required()
+  // }).authorization(allow => [allow.publicApiKey()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -18,7 +80,7 @@ export type Schema = ClientSchema<typeof schema>;
 export const data: ReturnType<typeof defineData> = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: 'userPool',
+    defaultAuthorizationMode: 'apiKey',
     apiKeyAuthorizationMode: {
       expiresInDays: 30,
     },

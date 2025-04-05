@@ -1,17 +1,33 @@
 <template>
-  <v-footer height="40" app>
-    <a v-for="item in items" :key="item.title" :href="item.href" :title="item.title"
-      class="d-inline-block mx-2 social-link" rel="noopener noreferrer" target="_blank">
-      <v-icon :icon="item.icon" :size="item.icon === 'mdi-account-cowboy-hat' ? 24 : 16" />
+  <v-footer
+    height="40"
+    app
+  >
+    <a
+      v-for="item in items"
+      :key="item.title"
+      :href="item.href"
+      :title="item.title"
+      class="d-inline-block mx-2 social-link"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <v-icon
+        :icon="item.icon"
+        :size="item.icon === 'mdi-account-cowboy-hat' ? 24 : 16"
+      />
     </a>
 
-    <div class="text-caption text-disabled" style="position: absolute; right: 16px;">
+    <div
+      class="text-caption text-disabled"
+      style="position: absolute; right: 16px;"
+    >
       &copy; {{ (new Date()).getFullYear() }} <span class="d-none d-sm-inline-block">Dave Mainville</span>
     </div>
   </v-footer>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const items = [
   {
     title: 'Dave Mainville',
